@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNet31.SimpleInjector.HostedService", "AspNet31.SimpleInjector.HostedService.csproj", "{33F1B7E4-FF00-41D3-B0BE-287B12769F49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp", "SampleApp/SampleApp.csproj", "{33F1B7E4-FF00-41D3-B0BE-287B12769F49}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

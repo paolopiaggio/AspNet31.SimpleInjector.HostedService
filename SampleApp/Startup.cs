@@ -1,24 +1,22 @@
-﻿using AspNet31.SimpleInjector.HostedService.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SampleApp.Middlewares;
 using SimpleInjector;
 
-namespace AspNet31.SimpleInjector.HostedService
+namespace SampleApp
 {
     public class Startup
     {
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            _container.Options.ResolveUnregisteredConcreteTypes = true;
         }
 
         public IConfiguration Configuration { get; }
         private readonly Container _container = new Container();
-
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -31,32 +29,24 @@ namespace AspNet31.SimpleInjector.HostedService
             });
         }
 
-        public void Configure(IApplicationBuilder app, IHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseSimpleInjector(_container);
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
 
-            app.UseStaticFiles();
+            app.UseHttpsRedirection();
+
             app.UseRouting();
+            app.UseAuthorization();
 
             app.UseMiddleware<LivenessMiddleware>(_container);
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
-
-            _container.Verify();
         }
     }
 }

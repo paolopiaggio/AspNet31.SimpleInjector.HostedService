@@ -2,9 +2,9 @@
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AspNet31.SimpleInjector.HostedService.Middlewares
+namespace SampleApp.Middlewares
 {
-    public class LivenessMiddleware
+    public class LivenessMiddleware : IMiddleware
     {
         private const string LivenessPathValue = "/ping";
 
