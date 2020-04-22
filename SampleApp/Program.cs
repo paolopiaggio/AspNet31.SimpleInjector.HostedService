@@ -12,6 +12,7 @@ namespace SampleApp
             CreateWebHostBuilder(args).Build().Run();
         }
 
+        // With this => the HostedService is started after Configure Services but before Configure App
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
@@ -19,6 +20,7 @@ namespace SampleApp
                     webBuilder.UseStartup<Startup>();
                 });
 
+        // With this => the HostedService is started after both Configure Services and Configure App
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
