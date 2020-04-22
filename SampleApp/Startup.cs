@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SampleApp.Middlewares;
 using SimpleInjector;
+using System;
 
 namespace SampleApp
 {
@@ -20,17 +21,21 @@ namespace SampleApp
 
         public void ConfigureServices(IServiceCollection services)
         {
+            Console.WriteLine("Configure Service started");
             services.AddLogging();
             services.AddControllers();
             services.AddSimpleInjector(_container, options =>
             {
                 options.AddAspNetCore();
                 options.AddLogging();
+                options.AddHostedService<MyHostedService>();
             });
+            Console.WriteLine("Configure Service completed");
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            Console.WriteLine("Configure App started");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -47,6 +52,7 @@ namespace SampleApp
             {
                 endpoints.MapControllers();
             });
+            Console.WriteLine("Configure App completed");
         }
     }
 }
